@@ -2,11 +2,30 @@ using System.Globalization;
 
 namespace DateRange;
 
-public static class DateService
+public class DateService
 {
-    public static DateTime BuildDate(string date)
+    public string? GetDates(string[] args)
     {
-        const string dateFormat = "dd.MM.yyyy";
-        return DateTime.ParseExact(date, dateFormat, DateTimeFormatInfo.InvariantInfo);
+
+        while(true)
+        {
+            if (!Validator.CheckEntryPointLength(args))
+                break;
+            
+            (string first, string second) datePair = (args[0], args[1]);
+            
+            if (!Validator.CheckDatesFormat(datePair))
+                break;
+    
+            const string dateFormat = "dd.MM.yyyy";
+            var date1 = DateTime.ParseExact(datePair.first, dateFormat, DateTimeFormatInfo.InvariantInfo);
+            var date2 = DateTime.ParseExact(datePair.second, dateFormat, DateTimeFormatInfo.InvariantInfo);
+            
+            var result =  Comparer.GetTimeSpan(date1, date2);
+
+            return result;
+        }
+
+        return null;
     }
 }

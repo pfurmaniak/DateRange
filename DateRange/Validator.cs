@@ -9,7 +9,7 @@ public static class Validator
         if (args.Length == 2)
             return true;
         
-        PrintInvalidMessage("length");
+        PrintInvalidMessage("wrongLength");
         return false;
     }
 
@@ -17,7 +17,7 @@ public static class Validator
     {
         return TryParse(dateStringPair) && CheckIfInputEmpty(dateStringPair) && IsSecondBigger(dateStringPair);
     }
-    
+
     private static bool CheckIfInputEmpty((string,string)dateStringPair)
     {
         if (dateStringPair.Item1.Length != 0 || dateStringPair.Item2.Length != 0)
@@ -26,7 +26,7 @@ public static class Validator
         PrintInvalidMessage("isEmpty");
         return false;
     }
-    
+
     private static bool TryParse((string,string)dateStringPair )
     {
         string[] dateFormats = {"dd.mm.yyyy"};
@@ -43,7 +43,6 @@ public static class Validator
     {
         var date1 = DateTime.Parse(dateStringPair.Item1);
         var date2 = DateTime.Parse(dateStringPair.Item2);
-
         var difference = DateTime.Compare(date1, date2);
 
         if (difference < 0)
@@ -63,7 +62,7 @@ public static class Validator
             case "wrongFormat":
                 Console.WriteLine("Error: Wrong date format provided - please use the dd-mm-yyyy format.\nTry again.");
                 break;
-            case "length":
+            case "wrongLength":
                 Console.WriteLine("Error: Wrond input - please provide 2 seperate dates in dd-mm-yyyy format.\nTry again.");
                 break;
             case "secondNotBigger":
