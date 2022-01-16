@@ -1,12 +1,9 @@
-using System.Globalization;
-
 namespace DateRange;
 
 public class DateService
 {
-    public string? GetDates(string[] args)
+    public static string? GetDates(string[] args)
     {
-
         while(true)
         {
             if (!Validator.CheckEntryPointLength(args))
@@ -17,9 +14,8 @@ public class DateService
             if (!Validator.CheckDatesFormat(datePair))
                 break;
     
-            const string dateFormat = "dd.MM.yyyy";
-            var date1 = DateTime.ParseExact(datePair.first, dateFormat, DateTimeFormatInfo.InvariantInfo);
-            var date2 = DateTime.ParseExact(datePair.second, dateFormat, DateTimeFormatInfo.InvariantInfo);
+            var date1 = DateTime.ParseExact(datePair.first, globalFormat, DateTimeFormatInfo.InvariantInfo);
+            var date2 = DateTime.ParseExact(datePair.second, globalFormat, DateTimeFormatInfo.InvariantInfo);
             
             var result =  Comparer.GetTimeSpan(date1, date2);
 

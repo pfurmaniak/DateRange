@@ -1,5 +1,3 @@
-using System.Globalization;
-
 namespace DateRange;
 
 public static class Validator
@@ -29,7 +27,8 @@ public static class Validator
 
     private static bool TryParse((string,string)dateStringPair )
     {
-        string[] dateFormats = {"dd.mm.yyyy"};
+        string[] dateFormats = {globalFormat};
+
         var parseSucceded = DateTime.TryParseExact(dateStringPair.Item1, dateFormats, DateTimeFormatInfo.InvariantInfo, DateTimeStyles.None, out _)
                             && DateTime.TryParseExact(dateStringPair.Item2, dateFormats, DateTimeFormatInfo.InvariantInfo, DateTimeStyles.None, out _);
         if (parseSucceded)
@@ -57,16 +56,16 @@ public static class Validator
         switch(error)
         {
             case "isEmpty":
-                Console.WriteLine("Error: No input provided.\nTry again.");
+                WriteLine("Error: No input provided.\nTry again.");
                 break;
             case "wrongFormat":
-                Console.WriteLine("Error: Wrong date format provided - please use the dd-mm-yyyy format.\nTry again.");
+                WriteLine("Error: Wrong date format provided - please use the dd-mm-yyyy format.\nTry again.");
                 break;
             case "wrongLength":
-                Console.WriteLine("Error: Wrond input - please provide 2 seperate dates in dd-mm-yyyy format.\nTry again.");
+                WriteLine("Error: Wrond input - please provide 2 seperate dates in dd-mm-yyyy format.\nTry again.");
                 break;
             case "secondNotBigger":
-                Console.WriteLine("Error: Second date must be bigger.\nTry again.");
+                WriteLine("Error: Second date must be bigger.\nTry again.");
                 break;
         }
     }

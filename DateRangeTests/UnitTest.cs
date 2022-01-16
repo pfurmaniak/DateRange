@@ -12,8 +12,7 @@ public class UnitTest
     public void Test(string firstDate, string secondDate, string expected)
     {
         string[] args = {firstDate, secondDate};
-        var dateService = new DateService();
-        var actual = dateService.GetDates(args);
+        var actual = DateService.GetDates(args);
         Assert.Equal(expected, actual);
     }
 }
